@@ -1,4 +1,5 @@
-package academy.digitallab.store.product.controller;
+package academy.digitallab.store.customer.controller;
+
 
 import lombok.Builder;
 import lombok.Getter;

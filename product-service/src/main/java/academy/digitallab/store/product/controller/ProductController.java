@@ -3,9 +3,9 @@ package academy.digitallab.store.product.controller;
 import academy.digitallab.store.product.entity.Category;
 import academy.digitallab.store.product.entity.Product;
 import academy.digitallab.store.product.service.ProductService;
+import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jersey.spi.inject.Errors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping (value = "/products")
 public class ProductController {
+
     @Autowired
     private ProductService productService ;
 
@@ -30,7 +31,7 @@ public class ProductController {
     public ResponseEntity<List<Product>> listProduct(@RequestParam(name = "categoryId", required = false) Long categoryId){
         List<Product> products = new ArrayList<>();
         if (null ==  categoryId){
-            products = productService.listAllProduct();
+             products = productService.listAllProduct();
             if (products.isEmpty()){
                 return ResponseEntity.noContent().build();
             }
@@ -64,7 +65,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productCreate);
     }
 
-    @PutMapping(value = "/{id}")
+   @PutMapping(value = "/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @RequestBody Product product){
         product.setId(id);
         Product productDB =  productService.updateProduct(product);
